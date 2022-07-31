@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+    <div class="popup">
+        <div class="popup__container">
+            <button class="button popup__close"></button>
+            <p class="popup__title">Редактировать профиль</p>
+            <input class="popup__input-name">
+            <input class="popup__input-description">
+            <button class="popup__submit">Сохранить</button>
+        </div>
+    </div>
+    <header class="header">
+        <img class="header__logo" src="./images/Vector.svg" alt="Логотип приложения Место">
+        <div class="header__line"></div>
+    </header>
+    <main class="content">
+        <section class="profile">
+            <img class="profile__pic" src="./images/pfofile.png" alt="Аватар пользователя">
+            <div class="profile__info">
+                <div class="profile__heading">
+                  <h1 class="profile__name">Жак-Ив Кусто</h1>
+                  <button class="button profile__edit-button"></button>
+                </div>
+                <span class="profile__description">Исследователь океана</span>
+            </div>
+            <button class="button profile__add-button"></button>
+        </section>
+        <section class="places">
+            <div class="place">
+                <img class="place__image" src="./images/baikal.jpg" alt="Лёд на озере Байкал">
+                <div class="place__caption">
+                    <h2 class="place__title">Байкал</h2>
+                    <button class="place__like-button"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img class="place__image" src="./images/kamchatka2.jpg" alt="Кратер на Камчатке">
+                <div class="place__caption">
+                    <h2 class="place__title">Камчатка</h2>
+                    <button class="place__like-button"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img class="place__image" src="./images/karelia.jpg" alt="Карелия с высоты птичьего полета">
+                <div class="place__caption">
+                    <h2 class="place__title">Карелия</h2>
+                    <button class="place__like-button"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img class="place__image" src="./images/krasnoyarsk.jpg" alt="Природа под городом Красноярск">
+                <div class="place__caption">
+                    <h2 class="place__title">Красноярск</h2>
+                    <button class="place__like-button"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img class="place__image" src="./images/altai.jpg" alt="Алтай в летний сезон">
+                <div class="place__caption">
+                    <h2 class="place__title">Алтай</h2>
+                    <button class="place__like-button"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img class="place__image" src="./images/sochi.jpg" alt="Неизвестные места города Сочи">
+                <div class="place__caption">
+                    <h2 class="place__title">Сочи</h2>
+                    <button class="place__like-button"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <span class="footer__copyright">© 2020 Mesto Russia</span>
+    </footer>
+    <script src="./index.js"></script>
+</body>
+</html>
