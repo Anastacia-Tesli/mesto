@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
+    <div class="page__container">
     <div class="popup">
         <form class="popup__container">
-            <button class="button popup__close"></button>
+            <button class="button popup__close" type="reset"></button>
             <p class="popup__title">Редактировать профиль</p>
             <input class="popup__input-name" title="Введите имя" type="text" value="Жак-Ив Кусто">
             <input class="popup__input-description" title="Введите описание" type="text" value="Исследователь океана">
-            <input class="popup__submit" type="submit" value="Сохранить">
+            <button class="popup__submit" type="submit">Сохранить</button>
         </form>
     </div>
     <header class="header">
@@ -81,6 +82,7 @@
     <footer class="footer">
         <span class="footer__copyright">&copy; 2020 Mesto Russia</span>
     </footer>
+    </div>
     <script src="./index.js"></script>
 </body>
 </html>

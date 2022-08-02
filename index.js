@@ -9,9 +9,10 @@ function popupClick() {
 openPopup.addEventListener('click', popupClick);
 closePopup.addEventListener('click', popupClick);
 
-let formElement = document.querySelector('.popup__container')
-let nameInput = formElement.querySelector('.popup__input-name')
-let jobInput = formElement.querySelector('.popup__input-description')
+
+let formElement = document.querySelector('.popup__container');
+let nameInput = formElement.querySelector('.popup__input-name');
+let jobInput = formElement.querySelector('.popup__input-description');
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -24,6 +25,8 @@ function formSubmitHandler (evt) {
 
     profileName.textContent = nameInput.value
     profileJob.textContent = jobInput.value
+
+    popupClick();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
