@@ -9,80 +9,81 @@
 </head>
 <body class="page">
     <div class="page__container">
-    <div class="popup">
-        <form class="popup__container">
-            <button class="button popup__close" type="reset"></button>
-            <p class="popup__title">Редактировать профиль</p>
-            <input class="popup__input-name" title="Введите имя" type="text" value="Жак-Ив Кусто">
-            <input class="popup__input-description" title="Введите описание" type="text" value="Исследователь океана">
-            <button class="popup__submit" type="submit">Сохранить</button>
-        </form>
+        <header class="header">
+           <img class="header__logo" src="./images/Vector.svg" alt="Логотип приложения Место">
+        </header>
+        <main class="content">
+            <section class="profile">
+                <img class="profile__pic" src="./images/pfofile.png" alt="Аватар пользователя">
+                <div class="profile__info">
+                   <div class="profile__heading">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="button profile__edit-button" type="button"></button>
+                    </div>
+                    <p class="profile__job">Исследователь океана</p>
+                </div>
+                <button class="button profile__add-button" type="button"></button>
+            </section>
+            <section class="places">
+                <div class="place">
+                    <img class="place__image" src="./images/baikal.jpg" alt="Лёд на озере Байкал">
+                    <div class="place__caption">
+                        <h2 class="place__title">Байкал</h2>
+                        <button class="place__like-button" type="button"></button>
+                    </div>
+                </div>
+                <div class="place">
+                    <img class="place__image" src="./images/kamchatka2.jpg" alt="Кратер на Камчатке">
+                    <div class="place__caption">
+                        <h2 class="place__title">Камчатка dfhgergvskbfa ivfhvjfbvd ikyuhb</h2>
+                        <button class="place__like-button" type="button"></button>
+                    </div>
+                </div>
+                <div class="place">
+                    <img class="place__image" src="./images/karelia.jpg" alt="Карелия с высоты птичьего полета">
+                    <div class="place__caption">
+                        <h2 class="place__title">Карелия</h2>
+                        <button class="place__like-button" type="button"></button>
+                    </div>
+                </div>
+                <div class="place">
+                    <img class="place__image" src="./images/krasnoyarsk.jpg" alt="Природа под городом Красноярск">
+                    <div class="place__caption">
+                        <h2 class="place__title">Красноярск</h2>
+                        <button class="place__like-button" type="button"></button>
+                    </div>
+                </div>
+                <div class="place">
+                    <img class="place__image" src="./images/altai.jpg" alt="Алтай в летний сезон">
+                    <div class="place__caption">
+                        <h2 class="place__title">Алтай</h2>
+                        <button class="place__like-button" type="button"></button>
+                    </div>
+                </div>
+                <div class="place">
+                    <img class="place__image" src="./images/sochi.jpg" alt="Неизвестные места города Сочи">
+                    <div class="place__caption">
+                        <h2 class="place__title">Сочи</h2>
+                        <button class="place__like-button" type="button"></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <span class="footer__copyright">&copy; 2020 Mesto Russia</span>
+        </footer>
+        <div class="popup">
+            <div class="popup__container">
+                <button class="button popup__close" type="button"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__form" name="">
+                   <input class="popup__input popup__input_category_name" name="name-input" type="text" value="Жак-Ив Кусто">
+                   <input class="popup__input popup__input_category_job" name="job-input" type="text" value="Исследователь океана">
+                   <button class="popup__submit" type="submit">Сохранить</button>
+                </form>  
+            </div>
+        </div>
     </div>
-    <header class="header">
-        <img class="header__logo" src="./images/Vector.svg" alt="Логотип приложения Место">
-        <div class="header__line"></div>
-    </header>
-    <main class="content">
-        <section class="profile">
-            <img class="profile__pic" src="./images/pfofile.png" alt="Аватар пользователя">
-            <div class="profile__info">
-                <div class="profile__heading">
-                  <h1 class="profile__name">Жак-Ив Кусто</h1>
-                  <button class="button profile__edit-button"></button>
-                </div>
-                <p class="profile__description">Исследователь океана</p>
-            </div>
-            <button class="button profile__add-button"></button>
-        </section>
-        <section class="places">
-            <div class="place">
-                <img class="place__image" src="./images/baikal.jpg" alt="Лёд на озере Байкал">
-                <div class="place__caption">
-                    <h2 class="place__title">Байкал</h2>
-                    <button class="place__like-button"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img class="place__image" src="./images/kamchatka2.jpg" alt="Кратер на Камчатке">
-                <div class="place__caption">
-                    <h2 class="place__title">Камчатка</h2>
-                    <button class="place__like-button"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img class="place__image" src="./images/karelia.jpg" alt="Карелия с высоты птичьего полета">
-                <div class="place__caption">
-                    <h2 class="place__title">Карелия</h2>
-                    <button class="place__like-button"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img class="place__image" src="./images/krasnoyarsk.jpg" alt="Природа под городом Красноярск">
-                <div class="place__caption">
-                    <h2 class="place__title">Красноярск</h2>
-                    <button class="place__like-button"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img class="place__image" src="./images/altai.jpg" alt="Алтай в летний сезон">
-                <div class="place__caption">
-                    <h2 class="place__title">Алтай</h2>
-                    <button class="place__like-button"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img class="place__image" src="./images/sochi.jpg" alt="Неизвестные места города Сочи">
-                <div class="place__caption">
-                    <h2 class="place__title">Сочи</h2>
-                    <button class="place__like-button"></button>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="footer">
-        <span class="footer__copyright">&copy; 2020 Mesto Russia</span>
-    </footer>
-    </div>
-    <script src="./index.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
