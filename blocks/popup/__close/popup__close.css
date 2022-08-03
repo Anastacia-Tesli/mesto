@@ -7,6 +7,8 @@
     background-image: url(../../../images/Close\ Icon.svg);
     background-color: transparent;
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
     border: none;
 }
 @media screen and (min-width: 1024px) {
