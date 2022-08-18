@@ -83,12 +83,12 @@ function formSubmitEdit (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value
     profileJob.textContent = jobInput.value
-    popupCloser(popupEdit);
+    popupOpener(popupEdit);
 } 
 function formSubmitAdd (evt) {
     evt.preventDefault();
     createPlace(linkInput.value, placeInput.value);
-    popupCloser(popupAdd);
+    popupOpener(popupAdd);
     formElementAdd.reset();
 }
 // Слушатели событий
