@@ -1,11 +1,11 @@
 // Переменные
 
 // Попапы
-const popupEdit = document.querySelector('.popup__edit');
+const popupEdit = document.querySelector('.popup-edit');
 const openEditPopup = document.querySelector('.profile__edit-button');
-const popupAdd = document.querySelector('.popup__add');
+const popupAdd = document.querySelector('.popup-add');
 const openAddPopup = document.querySelector('.profile__add-button');
-const popupShow = document.querySelector('.popup__show');
+const popupShow = document.querySelector('.popup-show');
 
 // Формы
 const formElementEdit = document.querySelector('.popup__form_type_edit');
