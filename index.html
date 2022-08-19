@@ -30,29 +30,29 @@
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
-        <div class="popup popup-edit">
+        <div class="popup popup_type_edit">
             <div class="popup__container">
                 <button class="button popup__close" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form popup__form_type_edit" name="form">
-                   <input class="popup__input popup__input_category_name" name="name-input" type="text">
-                   <input class="popup__input popup__input_category_job" name="job-input" type="text">
+                <form class="popup__form popup__form_type_edit" name="edit-form">
+                   <input class="popup__input popup__input_category_name" name="name-input" type="text" placeholder="Имя">
+                   <input class="popup__input popup__input_category_job" name="job-input" type="text" placeholder="Профессия">
                    <button class="popup__submit" type="submit">Сохранить</button>
                 </form>  
             </div>
         </div>
-        <div class="popup popup-add">
+        <div class="popup popup_type_add">
             <div class="popup__container">
                 <button class="button popup__close" type="button"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__form popup__form_type_add" name="form">
+                <form class="popup__form popup__form_type_add" name="add-form">
                    <input class="popup__input popup__input_category_place" name="place-input" type="text" placeholder="Название" required>
                    <input class="popup__input popup__input_category_link" name="link-input" type="url" placeholder="Ссылка на картинку" required>
                    <button class="popup__submit popup__submit" type="submit">Создать</button>
                 </form>  
             </div>
         </div>
-        <div class="popup popup-show">
+        <div class="popup popup_type_show">
             <div class="popup__content">
                 <button class="button popup__close" type="button"></button>
                 <img class="popup__image" alt="Фотография места">
@@ -70,6 +70,7 @@
             </div>
         </template>
     </div>
+    <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>

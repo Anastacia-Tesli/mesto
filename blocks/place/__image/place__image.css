@@ -1,4 +1,9 @@
 .place__image {
     width: 282px;
     height: 282px;
+    transition: opacity 0.2s ease-out;
+}
+.place__image:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
