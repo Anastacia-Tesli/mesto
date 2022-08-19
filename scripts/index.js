@@ -5,7 +5,7 @@ const popupEdit = document.querySelector('.popup__edit');
 const openEditPopup = document.querySelector('.profile__edit-button');
 const popupAdd = document.querySelector('.popup__add');
 const openAddPopup = document.querySelector('.profile__add-button');
-const popupShow = document.querySelector('.popup__show')
+const popupShow = document.querySelector('.popup__show');
 
 // Формы
 const formElementEdit = document.querySelector('.popup__form_type_edit');
@@ -66,48 +66,48 @@ function createPlace(image, title) {
     });
     placeElement.querySelector('.place__image').addEventListener('click', function() {
         popupOpener(popupShow);
-        popupShow.querySelector('.popup__image').src = image
-        popupShow.querySelector('.popup__description').textContent = title
-    })
-}
+        popupShow.querySelector('.popup__image').src = image;
+        popupShow.querySelector('.popup__description').textContent = title;
+    });
+};
 initialCards.forEach(function (element) {
-    createPlace(element.link, element.name); }
-    )
- 
+    createPlace(element.link, element.name); 
+});
 // Попапы
 function popupOpener(element) { 
     element.classList.toggle('popup_opened');
-}
+};
 //Формы
 function formSubmitEdit (evt) {
     evt.preventDefault();
-    profileName.textContent = nameInput.value
-    profileJob.textContent = jobInput.value
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
     popupOpener(popupEdit);
-} 
+};
 function formSubmitAdd (evt) {
     evt.preventDefault();
     createPlace(linkInput.value, placeInput.value);
     popupOpener(popupAdd);
     formElementAdd.reset();
-}
+};
+
 // Слушатели событий
 openEditPopup.addEventListener('click', function () {
     popupOpener(popupEdit);
-    nameInput.value = profileName.textContent
-    jobInput.value = profileJob.textContent
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
 });
 openAddPopup.addEventListener('click', function () {
     popupOpener(popupAdd);
 });
 popupEdit.querySelector('.popup__close').addEventListener('click', function() {
     popupOpener(popupEdit);
-})
+});
 popupAdd.querySelector('.popup__close').addEventListener('click', function() {
     popupOpener(popupAdd);
-})
+});
 popupShow.querySelector('.popup__close').addEventListener('click', function() {
     popupOpener(popupShow);
-})
+});
 formElementEdit.addEventListener('submit', formSubmitEdit);
 formElementAdd.addEventListener('submit', formSubmitAdd);
