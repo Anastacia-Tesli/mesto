@@ -26,16 +26,15 @@ const places = document.querySelector('.places');
  // Функции
  // Создание и добавление карточек
 function createCard(image, title) {
-    const placeElement = template.querySelector('.place').cloneNode(true);
-    
-    places.prepend(placeElement);
+    const placeElement = template.querySelector('.place').cloneNode(true);   
     placeElement.querySelector('.place__image').src = image;
     placeElement.querySelector('.place__title').textContent = title;
-    const likeButton = placeElement.querySelector('.place__like-button');
-    likeButton.addEventListener('click', function placeLiker() {
-        likeButton.classList.toggle('button_active')});
-    const deleteButton = placeElement.querySelector('.place__delete-button');
-    deleteButton.addEventListener('click', function placeDeleter () {
+    const buttonLike = placeElement.querySelector('.place__like-button');
+    buttonLike.addEventListener('click', function likePlace () {
+        buttonLike.classList.toggle('button_active');
+    });
+    const buttonDelete = placeElement.querySelector('.place__delete-button');
+    buttonDelete.addEventListener('click', function deletePlace () {
         placeElement.remove();
     });
     placeElement.querySelector('.place__image').addEventListener('click', function() {
@@ -43,14 +42,14 @@ function createCard(image, title) {
         popupShow.querySelector('.popup__image').src = image;
         popupShow.querySelector('.popup__description').textContent = title;
     });
-    renderCard(placeElement, places);
     return placeElement;
 };
 initialCards.forEach(function (element) {
-    createCard(element.link, element.name); 
+    const card = createCard(element.link, element.name); 
+    renderCard(card, places);
 });
-function renderCard(item, container) {
-    container.prepend(item);
+function renderCard(card, places) {
+    places.prepend(card);
 } 
 // Попапы
 function togglePopup(element) { 
@@ -65,7 +64,8 @@ function submitFormEdit (evt) {
 };
 function submitFormAdd (evt) {
     evt.preventDefault();
-    createCard(linkInput.value, placeInput.value);
+    const card = createCard(linkInput.value, placeInput.value);
+    renderCard(card, places);
     togglePopup(popupAdd);
     formElementAdd.reset();
 };
