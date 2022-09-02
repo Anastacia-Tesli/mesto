@@ -63,6 +63,12 @@ function closePopup(element) {
         closePopup(popup);
         }
     })
+    const form = element.querySelector('.popup__form')
+    const input = element.querySelector('.popup__input')
+    hideInputError(form, input);
+    const inputs = Array.from(form.querySelectorAll('.popup__input'))
+    const button = form.querySelector('.popup__button')
+    toggleButton(inputs, button);
 };
 //Формы
 function submitFormEdit (evt) {

@@ -72,3 +72,8 @@ const enableValidation = () => {
   })
 }
 enableValidation();
+
+const stopValidation = () => {
+  hideInputError(form, input);
+  toggleButton(inputs, button);
+}
