@@ -71,11 +71,10 @@ function closePopup(element) {
         inputErrorClass: 'popup__input_type_error',
         errorClass: 'popup__error_visible'
     }
-    const form = element.querySelector('.popup__form')
-    const input = element.querySelector('.popup__input')
-    const inputs = Array.from(form.querySelectorAll('.popup__input'))
-    const button = element.querySelector('.popup__button')
-    goToValidationDefault(form, input, inputs, button, config);
+    const form = element.querySelector('.popup__form');
+    const input = element.querySelector('.popup__input');
+    const button = element.querySelector('.popup__button');
+    goToValidationDefault(form, input, button, config);
 };
 //Формы
 function submitFormEdit (evt) {
