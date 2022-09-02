@@ -1,6 +1,8 @@
 .place__image {
     width: 282px;
     height: 282px;
+    object-position: top;
+    object-fit: cover;
     transition: opacity 0.2s ease-out;
 }
 .place__image:hover {
