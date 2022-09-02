@@ -72,7 +72,8 @@ enableValidation({
   errorClass: 'popup__error_visible'
 });
 // Сброс ошибок валидации
-const goToValidationDefault = (form, input, inputs, button, config) => {
+const goToValidationDefault = (form, input, button, config) => {
   hideInputError(form, input, config);
-  toggleButton(inputs, button, config);
+  button.classList.add(config.inactiveButtonClass);
+  button.setAttribute('disabled', 'true');
 }
