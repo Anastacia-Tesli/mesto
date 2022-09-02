@@ -60,15 +60,22 @@ function closePopup(element) {
     element.classList.remove('popup_opened');
     document.removeEventListener('keydown', function(evt) {
         if (evt.key == "Escape") {
-        closePopup(popup);
+        closePopup(element);
         }
     })
+    const config = {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__button',
+        inactiveButtonClass: 'popup__button_disabled',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__error_visible'
+    }
     const form = element.querySelector('.popup__form')
     const input = element.querySelector('.popup__input')
-    hideInputError(form, input);
     const inputs = Array.from(form.querySelectorAll('.popup__input'))
-    const button = form.querySelector('.popup__button')
-    toggleButton(inputs, button);
+    const button = element.querySelector('.popup__button')
+    goToValidationDefault(form, input, inputs, button, config);
 };
 //Формы
 function submitFormEdit (evt) {

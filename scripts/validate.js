@@ -1,16 +1,9 @@
-/*enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}); 
-*/ 
-const showInputError = (form, input) => {
+// Валидация форм
+// Показать/спрятать ошибки
+const showInputError = (form, input, config) => {
   const errorInput = form.querySelector(`.${input.id}-error`);
-  input.classList.add('popup__input_type_error');
-  errorInput.classList.add('popup__error_visible');
+  input.classList.add(config.inputErrorClass);
+  errorInput.classList.add(config.errorClass);
   if (input.validity.valueMissing) {
     errorInput.textContent = "Вы пропустили это поле."
   } else if (input.validity.typeMismatch) {
@@ -19,61 +12,67 @@ const showInputError = (form, input) => {
     errorInput.textContent = `Минимальное количество символов: ${input.minLength}. Длина текста сейчас: ${input.value.length} символ.`
   }
 }
-
-const hideInputError = (form, input) => {
+const hideInputError = (form, input, config) => {
   const errorInput = form.querySelector(`.${input.id}-error`);
-  input.classList.remove('popup__input_type_error');
-  errorInput.classList.remove('popup__error_visible');
+  input.classList.remove(config.inputErrorClass);
+  errorInput.classList.remove(config.errorClass);
   errorInput.textContent = ''
 }
-
-const checkValidity = (form, input) => {
+// Проверка на ошибки
+const checkValidity = (form, input, config) => {
   if (!input.validity.valid) {
-    showInputError(form, input);
+    showInputError(form, input, config);
   } else {
-    hideInputError(form, input);
+    hideInputError(form, input, config);
   }
 }
-
 const hasError = (inputs) => {
   return inputs.some((input) => {
     return !input.validity.valid
   })
 }
-const toggleButton = (inputs, button) => {
+// Поведение кнопки сабмит
+const toggleButton = (inputs, button, config) => {
   if (hasError(inputs)) {
-    button.classList.add('popup__button_disabled');
+    button.classList.add(config.inactiveButtonClass);
     button.setAttribute('disabled', 'true');
   } else {
-    button.classList.remove('popup__button_disabled');
+    button.classList.remove(config.inactiveButtonClass);
     button.removeAttribute('disabled');
   }
 }
-
-const setEventListeners = (form) => {
-  const inputs = Array.from(form.querySelectorAll('.popup__input'))
-  const button = form.querySelector('.popup__button')
-  toggleButton(inputs, button);
+// Слушатели событий на формах
+const setEventListeners = (form, config) => {
+  const inputs = Array.from(form.querySelectorAll(config.inputSelector))
+  const button = form.querySelector(config.submitButtonSelector)
+  toggleButton(inputs, button, config);
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
-       checkValidity(form, input);
-       toggleButton(inputs, button);
+       checkValidity(form, input, config);
+       toggleButton(inputs, button, config);
     })
   })
 }
-
-const enableValidation = () => {
-  const forms = Array.from(document.querySelectorAll('.popup__form'))
+// Запуск валидации
+const enableValidation = (config) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector))
   forms.forEach((form) => {
     form.addEventListener('submit', function (evt) {
       evt.preventDefault();
     })
-    setEventListeners(form);
+    setEventListeners(form, config);
   })
 }
-enableValidation();
-
-const stopValidation = () => {
-  hideInputError(form, input);
-  toggleButton(inputs, button);
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
+// Сброс ошибок валидации
+const goToValidationDefault = (form, input, inputs, button, config) => {
+  hideInputError(form, input, config);
+  toggleButton(inputs, button, config);
 }
