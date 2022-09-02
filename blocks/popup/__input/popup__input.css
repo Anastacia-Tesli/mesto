@@ -4,7 +4,8 @@
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid #C4C4C4;;
+    border-bottom: 1px solid #C4C4C4;
+    border-radius: 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
