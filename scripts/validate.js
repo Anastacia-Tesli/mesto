@@ -74,3 +74,5 @@ const disableValidation = (form, button, config) => {
   button.classList.add(config.inactiveButtonClass);
   button.setAttribute('disabled', 'true');
 }
+
+
