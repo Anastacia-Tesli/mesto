@@ -1,7 +1,7 @@
 .popup__button {
     width: 238px;
     height: 46px;
-    margin-top: 18px;
+    margin-top: 8px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -19,7 +19,7 @@
     .popup__button {
         width: 358px;
         height: 50px;
-        margin-top: 22px;
+        margin-top: 18px;
         font-size: 18px;
         line-height: 22px;
     }

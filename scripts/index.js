@@ -29,20 +29,18 @@ function createCard(image, title) {
     const placeElement = template.querySelector('.place').cloneNode(true);   
     placeElement.querySelector('.place__image').src = image;
     placeElement.querySelector('.place__title').textContent = title;
-    const buttonLike = placeElement.querySelector('.place__like-button');
-    buttonLike.addEventListener('click', function likePlace () {
-        buttonLike.classList.toggle('button_active');
-    });
-    const buttonDelete = placeElement.querySelector('.place__delete-button');
-    buttonDelete.addEventListener('click', function deletePlace () {
-        placeElement.remove();
-    });
-    placeElement.querySelector('.place__image').addEventListener('click', function() {
-        openPopup(popupShow);
-        popupShow.querySelector('.popup__image').src = image;
-        popupShow.querySelector('.popup__description').textContent = title;
-        setClosingEventListeners(popupShow)
-    });
+    placeElement.addEventListener('click', function(evt) {
+        if (evt.target.classList.contains('place__like-button')) {
+            placeElement.querySelector('.place__like-button').classList.toggle('button_active');
+        } else if (evt.target.classList.contains('place__delete-button')) {
+            placeElement.remove();
+        } else if (evt.target.classList.contains('place__image')) {
+            openPopup(popupShow);
+            popupShow.querySelector('.popup__image').src = image;
+            popupShow.querySelector('.popup__description').textContent = title;
+            setClosingEventListeners(popupShow)
+        }
+    })
     return placeElement;
 };
 initialCards.forEach(function (element) {
@@ -63,19 +61,9 @@ function closePopup(element) {
         closePopup(element);
         }
     })
-    const config = {
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__button',
-        inactiveButtonClass: 'popup__button_disabled',
-        inputErrorClass: 'popup__input_type_error',
-        errorClass: 'popup__error_visible'
-    }
     const form = element.querySelector('.popup__form')
-    const input = element.querySelector('.popup__input')
-    const inputs = Array.from(form.querySelectorAll('.popup__input'))
     const button = element.querySelector('.popup__button')
-    goToValidationDefault(form, input, inputs, button, config);
+    disableValidation(form, button, configObject)
 };
 //Формы
 function submitFormEdit (evt) {
@@ -116,6 +104,5 @@ function setClosingEventListeners(popup) {
         }
     })
 }
-
 formElementEdit.addEventListener('submit', submitFormEdit);
 formElementAdd.addEventListener('submit', submitFormAdd);

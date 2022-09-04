@@ -1,16 +1,10 @@
 // Валидация форм
 // Показать/спрятать ошибки
-const showInputError = (form, input, config) => {
+const showInputError = (form, input, message, config) => {
   const errorInput = form.querySelector(`.${input.id}-error`);
   input.classList.add(config.inputErrorClass);
   errorInput.classList.add(config.errorClass);
-  if (input.validity.valueMissing) {
-    errorInput.textContent = "Вы пропустили это поле."
-  } else if (input.validity.typeMismatch) {
-    errorInput.textContent = "Введите URL."
-  } else if (input.validity.tooShort) {
-    errorInput.textContent = `Минимальное количество символов: ${input.minLength}. Длина текста сейчас: ${input.value.length} символ.`
-  }
+  errorInput.textContent = message;
 }
 const hideInputError = (form, input, config) => {
   const errorInput = form.querySelector(`.${input.id}-error`);
@@ -21,7 +15,7 @@ const hideInputError = (form, input, config) => {
 // Проверка на ошибки
 const checkValidity = (form, input, config) => {
   if (!input.validity.valid) {
-    showInputError(form, input, config);
+    showInputError(form, input, input.validationMessage, config);
   } else {
     hideInputError(form, input, config);
   }
@@ -63,16 +57,20 @@ const enableValidation = (config) => {
     setEventListeners(form, config);
   })
 }
-enableValidation({
+const configObject = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-});
-// Сброс ошибок валидации
-const goToValidationDefault = (form, input, inputs, button, config) => {
-  hideInputError(form, input, config);
-  toggleButton(inputs, button, config);
+}
+enableValidation(configObject);
+
+// Сброс сообщений об ошибке
+const disableValidation = (form, button, config) => {
+  const inputs = Array.from(form.querySelectorAll(config.inputSelector))
+  inputs.forEach((input) => hideInputError(form, input, config));
+  button.classList.add(config.inactiveButtonClass);
+  button.setAttribute('disabled', 'true');
 }
