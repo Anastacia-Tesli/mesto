@@ -4,8 +4,6 @@
     object-position: top;
     object-fit: cover;
     transition: opacity 0.2s ease-out;
-    object-position: top;
-    object-fit: cover;
 }
 .place__image:hover {
     opacity: 0.8;
