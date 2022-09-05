@@ -13,7 +13,7 @@ const hideInputError = (form, input, config) => {
   errorInput.textContent = ''
 }
 // Проверка на ошибки
-const checkValidity = (form, input, config) => {
+const toggleInputError = (form, input, config) => {
   if (!input.validity.valid) {
     showInputError(form, input, input.validationMessage, config);
   } else {
@@ -26,7 +26,7 @@ const hasError = (inputs) => {
   })
 }
 // Поведение кнопки сабмит
-const toggleButton = (inputs, button, config) => {
+const toggleButtonState = (inputs, button, config) => {
   if (hasError(inputs)) {
     button.classList.add(config.inactiveButtonClass);
     button.setAttribute('disabled', 'true');
@@ -39,11 +39,11 @@ const toggleButton = (inputs, button, config) => {
 const setEventListeners = (form, config) => {
   const inputs = Array.from(form.querySelectorAll(config.inputSelector))
   const button = form.querySelector(config.submitButtonSelector)
-  toggleButton(inputs, button, config);
+  toggleButtonState(inputs, button, config);
   inputs.forEach((input) => {
     input.addEventListener('input', () => {
-       checkValidity(form, input, config);
-       toggleButton(inputs, button, config);
+       toggleInputError(form, input, config);
+       toggleButtonState(inputs, button, config);
     })
   })
 }
@@ -57,22 +57,10 @@ const enableValidation = (config) => {
     setEventListeners(form, config);
   })
 }
-const configObject = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}
-enableValidation(configObject);
-
 // Сброс сообщений об ошибке
 const disableValidation = (form, button, config) => {
-  const inputs = Array.from(form.querySelectorAll(config.inputSelector))
+  const inputs = form.querySelectorAll(config.inputSelector);
   inputs.forEach((input) => hideInputError(form, input, config));
   button.classList.add(config.inactiveButtonClass);
   button.setAttribute('disabled', 'true');
 }
-
-

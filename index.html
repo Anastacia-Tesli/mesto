@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
+    <script src="./scripts/validate.js" defer></script>
 </head>
 <body class="page">
     <div class="page__container">
@@ -18,11 +19,11 @@
                 <div class="profile__info">
                    <div class="profile__heading">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="button button_open profile__edit-button" type="button"></button>
+                        <button class="button button_open profile__edit-button" type="button" aria-label="Открыть редактирование профиля"></button>
                     </div>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button class="button button_open profile__add-button" type="button"></button>
+                <button class="button button_open profile__add-button" type="button" aria-label="Добавить место"></button>
             </section>
             <section class="places">
             </section>
@@ -32,7 +33,7 @@
         </footer>
         <div class="popup popup_type_edit">
             <div class="popup__container">
-                <button class="button popup__close" type="button"></button>
+                <button class="button popup__close" type="button" aria-label="Закрыть"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__form_type_edit" name="edit-form" novalidate>
                    <input id="name-input" class="popup__input" name="name-input" type="text" placeholder="Имя" required minlength="2" maxlength="40">
@@ -45,7 +46,7 @@
         </div>
         <div class="popup popup_type_add">
             <div class="popup__container">
-                <button class="button popup__close" type="button"></button>
+                <button class="button popup__close" type="button" aria-label="Закрыть"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_type_add" name="add-form" novalidate>
                    <input id="place-input" class="popup__input" name="place-input" type="text" placeholder="Название" required minlength="2" maxlength="30">
@@ -58,24 +59,23 @@
         </div>
         <div class="popup popup_type_show">
             <div class="popup__content">
-                <button class="button popup__close" type="button"></button>
-                <img class="popup__image" alt="Фотография места">
+                <button class="button popup__close" type="button" aria-label="Закрыть"></button>
+                <img class="popup__image">
                 <h2 class="popup__description"></h2>
             </div>
         </div>
         <template id="template">
             <div class="place">
-                <img class="place__image" alt="Фотография места">
-                <button class="button place__delete-button" type="button"></button>
+                <img class="place__image">
+                <button class="button place__delete-button" type="button" aria-label="Удалить"></button>
                 <div class="place__caption">
                     <h2 class="place__title"></h2>
-                    <button class="place__like-button" type="button"></button>
+                    <button class="place__like-button" type="button" aria-label="Лайкнуть"></button>
                 </div>
             </div>
         </template>
     </div>
-    <script src="./scripts/initial-cards.js"></script>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validate.js"></script>
+    <script src="./scripts/initial-cards.js" defer></script>
+    <script src="./scripts/index.js" defer></script>
 </body>
 </html>

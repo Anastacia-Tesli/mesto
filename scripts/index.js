@@ -27,7 +27,9 @@ const places = document.querySelector('.places');
  // Создание и добавление карточек
 function createCard(image, title) {
     const placeElement = template.querySelector('.place').cloneNode(true);   
-    placeElement.querySelector('.place__image').src = image;
+    const placeElementImage = placeElement.querySelector('.place__image')
+    placeElementImage.src = image;
+    placeElementImage.setAttribute('alt', `Фотография: ${title}`);
     placeElement.querySelector('.place__title').textContent = title;
     placeElement.addEventListener('click', function(evt) {
         if (evt.target.classList.contains('place__like-button')) {
@@ -36,9 +38,10 @@ function createCard(image, title) {
             placeElement.remove();
         } else if (evt.target.classList.contains('place__image')) {
             openPopup(popupShow);
-            popupShow.querySelector('.popup__image').src = image;
+            const popupShowImage = popupShow.querySelector('.popup__image')
+            popupShowImage.src = image;
+            popupShowImage.setAttribute('alt', `Фотография: ${title}`);
             popupShow.querySelector('.popup__description').textContent = title;
-            setClosingEventListeners(popupShow)
         }
     })
     return placeElement;
@@ -53,27 +56,45 @@ function renderCard(card, places) {
 // Попапы
 function openPopup(element) { 
     element.classList.add('popup_opened');
+    closePopupByClick(element);
+    closePopupOnEsc(element);
 };
 function closePopup(element) { 
     element.classList.remove('popup_opened');
+    element.removeEventListener('click', function(evt) {
+        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+            closePopup(element);
+        }
+    })
     document.removeEventListener('keydown', function(evt) {
         if (evt.key == "Escape") {
         closePopup(element);
         }
     })
-    const form = element.querySelector('.popup__form')
-    const button = element.querySelector('.popup__button')
+    if (element.querySelector('.popup__form')) {
+    const form = element.querySelector('.popup__form');
+    const button = element.querySelector('.popup__button');
     disableValidation(form, button, configObject)
+    }
 };
 //Формы
-function submitFormEdit (evt) {
-    evt.preventDefault();
+
+const configObject = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+}
+enableValidation(configObject);
+
+function submitFormEdit () {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(popupEdit);
 };
-function submitFormAdd (evt) {
-    evt.preventDefault();
+function submitFormAdd () {
     const card = createCard(linkInput.value, placeInput.value);
     renderCard(card, places);
     closePopup(popupAdd);
@@ -85,22 +106,22 @@ popupEditOpenButton.addEventListener('click', function () {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    setClosingEventListeners(popupEdit)
 });
 popupAddOpenButton.addEventListener('click', function () {
     openPopup(popupAdd);
-    setClosingEventListeners(popupAdd)
 });
 
-function setClosingEventListeners(popup) {
+const closePopupByClick = (popup) => {
     popup.addEventListener('click', function(evt) {
         if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
             closePopup(popup);
         }
     })
+}
+const closePopupOnEsc = (popup) => {  
     document.addEventListener('keydown', function(evt) {
         if (evt.key == "Escape") {
-        closePopup(popup);
+            closePopup(popup);
         }
     })
 }
