@@ -54,23 +54,26 @@ function renderCard(card, places) {
     places.prepend(card);
 } 
 // Попапы
+const closePopupByClick = (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+        closePopup(evt.currentTarget);
+    }
+}
+const closePopupOnEsc = (evt) => {  
+    if (evt.key == "Escape") {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
+    }
+}
 function openPopup(element) { 
     element.classList.add('popup_opened');
-    closePopupByClick(element);
-    closePopupOnEsc(element);
+    element.addEventListener('click', closePopupByClick);
+    document.addEventListener('keydown', closePopupOnEsc)
 };
 function closePopup(element) { 
     element.classList.remove('popup_opened');
-    element.removeEventListener('click', function(evt) {
-        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-            closePopup(element);
-        }
-    })
-    document.removeEventListener('keydown', function(evt) {
-        if (evt.key == "Escape") {
-        closePopup(element);
-        }
-    })
+    element.removeEventListener('click', closePopupByClick);
+    document.removeEventListener('keydown', closePopupOnEsc);
     if (element.querySelector('.popup__form')) {
     const form = element.querySelector('.popup__form');
     const button = element.querySelector('.popup__button');
@@ -78,7 +81,6 @@ function closePopup(element) {
     }
 };
 //Формы
-
 const configObject = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -100,8 +102,6 @@ function submitFormAdd () {
     closePopup(popupAdd);
     formElementAdd.reset();
 };
-
-// Слушатели событий
 popupEditOpenButton.addEventListener('click', function () {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
@@ -110,20 +110,5 @@ popupEditOpenButton.addEventListener('click', function () {
 popupAddOpenButton.addEventListener('click', function () {
     openPopup(popupAdd);
 });
-
-const closePopupByClick = (popup) => {
-    popup.addEventListener('click', function(evt) {
-        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-            closePopup(popup);
-        }
-    })
-}
-const closePopupOnEsc = (popup) => {  
-    document.addEventListener('keydown', function(evt) {
-        if (evt.key == "Escape") {
-            closePopup(popup);
-        }
-    })
-}
 formElementEdit.addEventListener('submit', submitFormEdit);
 formElementAdd.addEventListener('submit', submitFormAdd);
