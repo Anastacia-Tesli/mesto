@@ -1,9 +1,9 @@
-import { openPopup } from "./index.js";
 export class Card {
-    constructor(data, templateSelector) {
-        this._image = data.link;
+    constructor(data, templateSelector, handleOpenPopup) {
+        this._imageLink = data.link;
         this._title = data.name;
         this._templateSelector = templateSelector;
+        this._handleOpenPopup = handleOpenPopup;
     }
     _getTemplate() {
         const template = document.querySelector(this._templateSelector).content;
@@ -13,8 +13,9 @@ export class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector('.place__image').src = this._image;
-        this._element.querySelector('.place__image').setAttribute('alt', `Фотография: ${this._title}`);
+        this._image = this._element.querySelector('.place__image');
+        this._image.src = this._imageLink;
+        this._image.setAttribute('alt', `Фотография: ${this._title}`);
         this._element.querySelector('.place__title').textContent = this._title;
         return this._element;
     }
@@ -25,12 +26,7 @@ export class Card {
         this._element.remove();
     }
     _handleImageClick() {
-        const popupShow = document.querySelector('.popup_type_show');
-        openPopup(popupShow);
-        const popupShowImage = popupShow.querySelector('.popup__image')
-        popupShowImage.src = this._image;
-        popupShowImage.setAttribute('alt', `Фотография: ${this._title}`);
-        popupShow.querySelector('.popup__description').textContent = this._title;
+        this._handleOpenPopup(this._title, this._imageLink);
     }
     _setEventListeners() {
         this._element.querySelector('.place__like-button').addEventListener('click', () => {
@@ -44,37 +40,3 @@ export class Card {
         })
     }
 }
-
-// Массив карточек
-export const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
-export const defaultCards = initialCards.forEach((element) => {
-  const card = new Card(element, '#template');
-  const cardElement = card.generateCard();
-  document.querySelector('.places').prepend(cardElement);
-});
