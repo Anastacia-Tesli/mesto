@@ -1,14 +1,14 @@
-export class Card {
-    constructor(data, templateSelector, handleOpenPopup) {
+export default class Card {
+    constructor(data, templateSelector, handleCardClick) {
         this._imageLink = data.link;
         this._title = data.name;
         this._templateSelector = templateSelector;
-        this._handleOpenPopup = handleOpenPopup;
+        this._handleCardClick = handleCardClick;
     }
     _getTemplate() {
         const template = document.querySelector(this._templateSelector).content;
-        const placeElement = template.querySelector('.place').cloneNode(true);
-        return placeElement;
+        const cardElement = template.querySelector('.place').cloneNode(true);
+        return cardElement;
     }
     generateCard() {
         this._element = this._getTemplate();
@@ -25,9 +25,6 @@ export class Card {
     _handleDeleteClick() {
         this._element.remove();
     }
-    _handleImageClick() {
-        this._handleOpenPopup(this._title, this._imageLink);
-    }
     _setEventListeners() {
         this._element.querySelector('.place__like-button').addEventListener('click', (evt) => {
             this._handleLikeClick(evt.target);
@@ -36,7 +33,7 @@ export class Card {
             this._handleDeleteClick();
         })
         this._image.addEventListener('click', () => {
-            this._handleImageClick();
+            this._handleCardClick(this._imageLink, this._title);
         })
     }
 }
