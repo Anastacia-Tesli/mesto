@@ -1,4 +1,4 @@
-//import './index.css';
+import './index.css';
 import { 
     initialCards, 
     placesSelector,
@@ -22,12 +22,16 @@ import UserInfo from "../scripts/components/UserInfo.js";
 
 // Рендеринг карточек 
 
+const createCard = (item) => {
+    const card = new Card(item, '#template', handleCardClick);
+    const cardElement = card.generateCard();
+    cardsSection.addItems(cardElement);
+}
+
 const cardsSection = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, '#template', handleCardClick);
-        const cardElement = card.generateCard();
-        cardsSection.addItems(cardElement);
+        createCard(item)
     }
   },
   placesSelector
@@ -43,36 +47,40 @@ formAddValidated.enableValidation();
 
 // Открытие попапов
 
+// Попап с изображением
+const popupWithImage = new PopupWithImage(popupShowSelector)
 function handleCardClick(image, title) {
-    const popupWithImage = new PopupWithImage({image, title}, popupShowSelector)
-    popupWithImage.open();
+    popupWithImage.open(image, title);
 }
-popupEditOpenButton.addEventListener('click', () => {
-    const popupEdit = new PopupWithForm({
-        popupSelector: popupEditSelector,
-        handleSubmit: (formData) => {
-            userInfo.setUserInfo(formData);
-        }
-    })
-    formEditValidated.disableValidation();
-    popupEdit.open();
-    const userInfo = new UserInfo({
-        nameSelector: '.profile__name', 
-        jobSelector: '.profile__job'
-    })
-    const profileInfo = userInfo.getUserInfo();
-    nameInput.value = profileInfo.user
-    jobInput.value = profileInfo.job
+popupWithImage.setEventListeners()
+// Попап изменения профиля
+const userInfo = new UserInfo({
+    nameSelector: '.profile__name', 
+    jobSelector: '.profile__job'
+})
+const popupEdit = new PopupWithForm({
+    popupSelector: popupEditSelector,
+    handleSubmit: (formData) => {
+        userInfo.setUserInfo(formData);
+    }
 });
+popupEdit.setEventListeners();
+popupEditOpenButton.addEventListener('click', () => {
+    formEditValidated.disableValidation();
+    const profileInfo = userInfo.getUserInfo();
+    nameInput.value = profileInfo.user;
+    jobInput.value = profileInfo.job;
+    popupEdit.open();
+});
+// Попап добавления карточки
+const popupAdd = new PopupWithForm({
+    popupSelector: popupAddSelector,
+    handleSubmit: (formData) => {
+        createCard(formData);
+    }
+});
+popupAdd.setEventListeners();
 popupAddOpenButton.addEventListener('click', () => {
-    const popupAdd = new PopupWithForm({
-        popupSelector: popupAddSelector,
-        handleSubmit: (formData) => {
-            const card = new Card(formData, '#template', handleCardClick);
-            const cardElement = card.generateCard();
-            cardsSection.addItems(cardElement);
-        }
-    });
     formAddValidated.disableValidation();
     popupAdd.open();
 });

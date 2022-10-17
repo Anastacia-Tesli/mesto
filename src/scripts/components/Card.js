@@ -24,6 +24,7 @@ export default class Card {
     }
     _handleDeleteClick() {
         this._element.remove();
+        this._element = null;
     }
     _setEventListeners() {
         this._element.querySelector('.place__like-button').addEventListener('click', (evt) => {

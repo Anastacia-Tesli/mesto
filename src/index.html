@@ -5,16 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
     <div class="page__container">
         <header class="header">
-           <img class="header__logo" src="./images/Vector.svg" alt="Логотип приложения Место">
+           <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="Логотип приложения Место">
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__pic" src="./images/pfofile.png" alt="Аватар пользователя">
+                <img class="profile__pic" src="<%=require('./images/pfofile.png')%>" alt="Аватар пользователя">
                 <div class="profile__info">
                    <div class="profile__heading">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
