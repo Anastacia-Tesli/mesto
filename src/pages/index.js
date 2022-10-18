@@ -1,4 +1,4 @@
-import './index.css';
+//import './index.css';
 import { 
     initialCards, 
     placesSelector,
@@ -25,18 +25,19 @@ import UserInfo from "../scripts/components/UserInfo.js";
 const createCard = (item) => {
     const card = new Card(item, '#template', handleCardClick);
     const cardElement = card.generateCard();
-    cardsSection.addItems(cardElement);
+    return cardElement
 }
 
 const cardsSection = new Section({
     items: initialCards,
     renderer: (item) => {
-        createCard(item)
+        cardsSection.addItems(createCard(item));
     }
   },
   placesSelector
 );
 cardsSection.renderItems();
+;
 
 // Валидация
 
@@ -76,7 +77,7 @@ popupEditOpenButton.addEventListener('click', () => {
 const popupAdd = new PopupWithForm({
     popupSelector: popupAddSelector,
     handleSubmit: (formData) => {
-        createCard(formData);
+        cardsSection.addItems(createCard(formData));
     }
 });
 popupAdd.setEventListeners();
