@@ -13,13 +13,15 @@
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__pic" src="<%=require('./images/pfofile.png')%>" alt="Аватар пользователя">
+                <div class="profile__pic">
+                    <img class="profile__avatar" src="" alt="Аватар пользователя">
+                </div>
                 <div class="profile__info">
                    <div class="profile__heading">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <h1 class="profile__name"></h1>
                         <button class="button button_open profile__edit-button" type="button" aria-label="Открыть редактирование профиля"></button>
                     </div>
-                    <p class="profile__job">Исследователь океана</p>
+                    <p class="profile__job"></p>
                 </div>
                 <button class="button button_open profile__add-button" type="button" aria-label="Добавить место"></button>
             </section>
@@ -34,10 +36,21 @@
                 <button class="button popup__close" type="button" aria-label="Закрыть"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__form_type_edit" name="edit-form" novalidate>
-                   <input id="name-input" class="popup__input" name="user" type="text" placeholder="Имя" required minlength="2" maxlength="40">
+                   <input id="name-input" class="popup__input" name="name" type="text" placeholder="Имя" required minlength="2" maxlength="40">
                    <span class="popup__error name-input-error"></span>
-                   <input id="job-input" class="popup__input" name="job" type="text" placeholder="О себе" required minlength="2" maxlength="200">
+                   <input id="job-input" class="popup__input" name="about" type="text" placeholder="О себе" required minlength="2" maxlength="200">
                    <span class="popup__error job-input-error"></span>
+                   <button class="popup__button" type="submit">Сохранить</button>
+                </form>  
+            </div>
+        </div>
+        <div class="popup popup_type_pic">
+            <div class="popup__container">
+                <button class="button popup__close" type="button" aria-label="Закрыть"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form popup__form_type_pic" name="edit-form" novalidate>
+                   <input id="pic-input" class="popup__input" name="avatar" type="url" placeholder="Ссылка на картинку" required minlength="2" required>
+                   <span class="popup__error pic-input-error"></span>
                    <button class="popup__button" type="submit">Сохранить</button>
                 </form>  
             </div>
@@ -62,17 +75,28 @@
                 <h2 class="popup__description"></h2>
             </div>
         </div>
+        <div class="popup popup_type_confirm">
+            <div class="popup__container">
+                <button class="button popup__close" type="button" aria-label="Закрыть"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <button class="popup__button" type="button">Да</button>
+            </div>
+        </div>
         <template id="template">
             <div class="place">
                 <img class="place__image">
                 <button class="button place__delete-button" type="button" aria-label="Удалить"></button>
                 <div class="place__caption">
                     <h2 class="place__title"></h2>
-                    <button class="place__like-button" type="button" aria-label="Лайкнуть"></button>
+                    <div class="place__like">
+                        <button class="place__like-button" type="button" aria-label="Лайкнуть"></button>
+                        <span class="place__like-number"></span>
+                    </div>
+                    
                 </div>
             </div>
         </template>
     </div>
-    <script type="module" src="./pages/index.js" defer></script>
+
 </body>
 </html>

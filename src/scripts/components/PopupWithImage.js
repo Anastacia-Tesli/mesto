@@ -11,4 +11,4 @@ export default class PopupWithImage extends Popup {
         this._description.textContent = title;
         super.open();
     }
-}   
+}
