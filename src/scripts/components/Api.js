@@ -28,17 +28,11 @@ export default class Api {
             about: `${data.about}`
           })
         )
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
     editAvatar(data) {
         return this._makePromise('/users/me/avatar', 'PATCH', JSON.stringify({
             avatar: `${data.avatar}`
         }))
-        .catch((err) => {
-            console.log(`Ошибка: ${err}`);
-        })
     }
     addCard(data) {
         return this._makePromise('/cards', 'POST', JSON.stringify({

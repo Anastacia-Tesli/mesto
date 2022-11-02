@@ -65,19 +65,21 @@ const cardsSection = new Section({
  placesSelector
 );
 
-function handlePutLike(number, id) {
+function handlePutLike(card, id) {
     api.putLike(id)
     .then((res) => {
-        number.textContent = res.likes.length
+        card.countLikes(res)
+        card.toggleLike()
     })
     .catch((err) => {
         console.log(`Ошибка: ${err}`);
     })
 }
-function handleDeleteLike(number, id) {
+function handleDeleteLike(card, id) {
     api.deleteLike(id)
     .then((res) => {
-        number.textContent = res.likes.length
+        card.countLikes(res)
+        card.toggleLike()
     })
     .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -108,8 +110,12 @@ function handleDeleteClick(card, cardId) {
     popupConfirmation.open(card, cardId);
 }
 popupConfirmation.setEventListeners();
-function handleConfirmClick(cardId) {
+function handleConfirmClick(card, cardId) {
     api.deleteCard(cardId)
+    .then(() => {
+        card._deleteCard()
+        popupConfirmation.close()
+    })
     .catch((err) => {
         console.log(`Ошибка: ${err}`);
     })
@@ -123,8 +129,10 @@ const popupPic = new PopupWithForm({
     handleSubmit: (formData) => {
         popupPic.loading(true); 
         api.editAvatar(formData)
-        .then((formData) => {
-            userInfo.setUserPic(formData)
+        .then((res) => {
+            userInfo.setUserPic(res)
+            popupPic.close()
+            // закрытия попапов?? здесь
         })
         .catch((err) => {
             console.log(`Ошибка: ${err}`);
@@ -137,7 +145,6 @@ const popupPic = new PopupWithForm({
 popupPic.setEventListeners();
 popupPicOpenButton.addEventListener('click', () => {
     formPicValidated.disableValidation();
-    picInput.value = userInfo.getUserPic();
     popupPic.open();
 })
 
@@ -148,8 +155,9 @@ const popupEdit = new PopupWithForm({
     handleSubmit: (formData) => {
         popupEdit.loading(true); 
         api.editProfile(formData)
-        .then((formData) => {
-            userInfo.setUserInfo(formData)
+        .then((res) => {
+            userInfo.setUserInfo(res)
+            popupEdit.close()
         })
         .catch((err) => {
             console.log(`Ошибка: ${err}`);
@@ -173,8 +181,9 @@ const popupAdd = new PopupWithForm({
     handleSubmit: (formData) => {
         popupAdd.loading(true); 
         api.addCard(formData)
-        .then((formData) => {
-            cardsSection.addItems(createCard(formData))
+        .then((res) => {
+            cardsSection.addItems(createCard(res))
+            popupAdd.close()
         })
         .catch((err) => {
             console.log(`Ошибка: ${err}`);
